@@ -15,3 +15,8 @@ This may be updated in a later commit to be more distinct.
 
 For a future implementation, I am considering a different algorithm to change the screen color depending on the total 
 amount of time (in ms) pixels have been visited vs the duration the mouse has been sitting in a particular spot. 
+
+Thinking of implementing something similar to the image in the `Eye Tracking Heat Map` section, here:
+https://sitetuners.com/blog/do-heat-maps-really-work/
+
+Maybe add a webview on the screen as well with the heat map translucent on top of the page. 
