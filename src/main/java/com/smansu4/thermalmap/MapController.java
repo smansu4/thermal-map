@@ -31,11 +31,13 @@ public class MapController implements Initializable {
     private LocalDateTime lastMovementTimestamp;
 
     List<MapColor> heatMapColors = List.of(
-            new MapColor(204, 255, 204, 1, "lightGreen"),
-            new MapColor(229, 255, 204, 2, "lightYellow"),
-            new MapColor(255, 255, 204, 3, "yellow"),
-            new MapColor(255, 229, 204, 4, "orange"),
-            new MapColor(255, 204, 204, 5, "red"));
+            new MapColor(204, 255, 255, 1, "lightBlue"),
+            new MapColor(204, 255, 229, 2, "blue"),
+            new MapColor(204, 255, 204, 3, "lightGreen"),
+            new MapColor(229, 255, 204, 4, "lightYellow"),
+            new MapColor(255, 255, 204, 5, "yellow"),
+            new MapColor(255, 229, 204, 6, "orange"),
+            new MapColor(255, 204, 204, 7, "red"));
 
     private AnimationTimer animationTimer = new AnimationTimer() {
 
@@ -53,10 +55,19 @@ public class MapController implements Initializable {
                 colorCanvas(currentX, currentY, heatMapColors.get(2));
             }
             else if(now.minusSeconds(20).isBefore(lastMovementTimestamp)) {
+                colorCanvas(currentX, currentY, heatMapColors.get(3));
+            }
+            else if(now.minusSeconds(25).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(4));
             }
-            else if(now.minusSeconds(20).isBefore(lastMovementTimestamp)) {
+            else if(now.minusSeconds(30).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(5));
+            }
+            else if(now.minusSeconds(35).isBefore(lastMovementTimestamp)) {
+                colorCanvas(currentX, currentY, heatMapColors.get(6));
+            }
+            else if(now.minusSeconds(40).isBefore(lastMovementTimestamp)) {
+                colorCanvas(currentX, currentY, heatMapColors.get(7));
             }
         }
     };
