@@ -42,8 +42,16 @@ public class MapController implements Initializable {
         public void handle(long l) {
             LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
 
+            /**
+             * todo: instead of starting the count all over again,
+             * update the color to the next intensity after DURATION_MS
+             * has passed.
+             *
+             * Will need to refactor below to get the intensity of the current
+             * pixel, then get the next color intensity.
+             */
             if(now.minusSeconds(DURATION_MS).isBefore(lastMovementTimestamp)) {
-                colorCanvas(currentX, currentY, heatMapColors.get(0));
+                colorCanvas(currentX, currentY, heatMapColors.getFirst());
             }
             else if(now.minusSeconds(DURATION_MS*2).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(1));
