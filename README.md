@@ -19,4 +19,5 @@ amount of time (in ms) pixels have been visited vs the duration the mouse has be
 Thinking of implementing something similar to the image in the `Eye Tracking Heat Map` section, here:
 https://sitetuners.com/blog/do-heat-maps-really-work/
 
-Maybe add a webview on the screen as well with the heat map translucent on top of the page. 
+Also consider a gradient radiating outwards like in the image above. 
+Maybe add a webview on the screen as well with the heat map translucent on top of the page.
