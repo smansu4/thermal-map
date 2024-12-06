@@ -26,6 +26,7 @@ public class MapController implements Initializable {
     Pane pane;
 
     private static final int RADIUS = 20;
+    private final int DURATION_MS = 3;
     private int currentX;
     private int currentY;
     private LocalDateTime lastMovementTimestamp;
@@ -45,28 +46,28 @@ public class MapController implements Initializable {
         public void handle(long l) {
             LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
 
-            if(now.minusSeconds(5).isBefore(lastMovementTimestamp)) {
+            if(now.minusSeconds(DURATION_MS).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(0));
             }
-            else if(now.minusSeconds(10).isBefore(lastMovementTimestamp)) {
+            else if(now.minusSeconds(DURATION_MS*2).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(1));
             }
-            else if(now.minusSeconds(15).isBefore(lastMovementTimestamp)) {
+            else if(now.minusSeconds(DURATION_MS*3).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(2));
             }
-            else if(now.minusSeconds(20).isBefore(lastMovementTimestamp)) {
+            else if(now.minusSeconds(DURATION_MS*4).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(3));
             }
-            else if(now.minusSeconds(25).isBefore(lastMovementTimestamp)) {
+            else if(now.minusSeconds(DURATION_MS*5).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(4));
             }
-            else if(now.minusSeconds(30).isBefore(lastMovementTimestamp)) {
+            else if(now.minusSeconds(DURATION_MS*6).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(5));
             }
-            else if(now.minusSeconds(35).isBefore(lastMovementTimestamp)) {
+            else if(now.minusSeconds(DURATION_MS*7).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(6));
             }
-            else if(now.minusSeconds(40).isBefore(lastMovementTimestamp)) {
+            else if(now.minusSeconds(DURATION_MS*8).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(7));
             }
         }
@@ -103,7 +104,7 @@ public class MapController implements Initializable {
 
         for (int x = xInitialPos; x <= xEndPos; x++) {
             for (int y = yInitialPos; y <= yEndPos; y++) {
-                if(x >=0 && y >= 0)
+                if(coordinateWithinAppBoundary(x, y))
                 {
                     if (isInsideCircle(x, y, centerX, centerY)) {
                         currentColor = snap.getPixelReader().getColor(x, y);
@@ -115,6 +116,11 @@ public class MapController implements Initializable {
                 }
             }
         }
+    }
+
+    private boolean coordinateWithinAppBoundary(int x, int y) {
+        return x >= 0 && x < ThermalMapApplication.APP_WIDTH
+                && y >= 0 && y < ThermalMapApplication.APP_HEIGHT;
     }
 
     private int getCorrelatedColorIntensity(Color currentColor) {
