@@ -25,7 +25,7 @@ public class MapController implements Initializable {
     @FXML
     Pane pane;
 
-    private static final int RADIUS = 20;
+    private static final int RADIUS = 30;
     private final int DURATION_MS = 3;
     private int currentX;
     private int currentY;
@@ -66,9 +66,6 @@ public class MapController implements Initializable {
             }
             else if(now.minusSeconds(DURATION_MS*7).isBefore(lastMovementTimestamp)) {
                 colorCanvas(currentX, currentY, heatMapColors.get(6));
-            }
-            else if(now.minusSeconds(DURATION_MS*8).isBefore(lastMovementTimestamp)) {
-                colorCanvas(currentX, currentY, heatMapColors.get(7));
             }
         }
     };
