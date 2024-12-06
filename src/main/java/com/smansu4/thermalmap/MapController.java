@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import java.net.URL;
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MapController implements Initializable {
@@ -29,6 +30,13 @@ public class MapController implements Initializable {
     private int currentY;
     private LocalDateTime lastMovementTimestamp;
 
+    List<MapColor> heatMapColors = List.of(
+            new MapColor(204, 255, 204, 1, "lightGreen"),
+            new MapColor(229, 255, 204, 2, "lightYellow"),
+            new MapColor(255, 255, 204, 3, "yellow"),
+            new MapColor(255, 229, 204, 4, "orange"),
+            new MapColor(255, 204, 204, 5, "red"));
+
     private AnimationTimer animationTimer = new AnimationTimer() {
 
         @Override
@@ -36,19 +44,19 @@ public class MapController implements Initializable {
             LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
 
             if(now.minusSeconds(5).isBefore(lastMovementTimestamp)) {
-                colorCanvas(currentX, currentY, Color.rgb(204, 255, 204));
+                colorCanvas(currentX, currentY, heatMapColors.get(0));
             }
             else if(now.minusSeconds(10).isBefore(lastMovementTimestamp)) {
-                colorCanvas(currentX, currentY, Color.rgb(229, 255, 204));
+                colorCanvas(currentX, currentY, heatMapColors.get(1));
             }
             else if(now.minusSeconds(15).isBefore(lastMovementTimestamp)) {
-                colorCanvas(currentX, currentY, Color.rgb(255, 255, 204));
+                colorCanvas(currentX, currentY, heatMapColors.get(2));
             }
             else if(now.minusSeconds(20).isBefore(lastMovementTimestamp)) {
-                colorCanvas(currentX, currentY, Color.rgb(255, 229, 204));
+                colorCanvas(currentX, currentY, heatMapColors.get(4));
             }
             else if(now.minusSeconds(20).isBefore(lastMovementTimestamp)) {
-                colorCanvas(currentX, currentY, Color.rgb(255, 204, 204));
+                colorCanvas(currentX, currentY, heatMapColors.get(5));
             }
         }
     };
@@ -70,13 +78,13 @@ public class MapController implements Initializable {
         return distanceX * distanceX + distanceY * distanceY <= RADIUS * RADIUS;
     }
 
-    private void colorCanvas(int centerX, int centerY, Color color) {
+    private void colorCanvas(int centerX, int centerY, MapColor color) {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         PixelWriter pixelWriter = gc.getPixelWriter();
         WritableImage snap = gc.getCanvas().snapshot(null, null);
-        Color currentColor = snap.getPixelReader().getColor(centerX, centerY);
 
+        Color currentColor;
         int xInitialPos = centerX - RADIUS;
         int xEndPos = centerX + RADIUS;
         int yInitialPos = centerY - RADIUS;
@@ -84,11 +92,27 @@ public class MapController implements Initializable {
 
         for (int x = xInitialPos; x <= xEndPos; x++) {
             for (int y = yInitialPos; y <= yEndPos; y++) {
-                if (isInsideCircle(x, y, centerX, centerY)) {
-                    pixelWriter.setColor(x, y, color);
+                if(x >=0 && y >= 0)
+                {
+                    if (isInsideCircle(x, y, centerX, centerY)) {
+                        currentColor = snap.getPixelReader().getColor(x, y);
+                        int intensity = getCorrelatedColorIntensity(currentColor);
+
+                        if (intensity < color.getIntensity())
+                            pixelWriter.setColor(x, y, color.getColor());
+                    }
                 }
             }
         }
+    }
+
+    private int getCorrelatedColorIntensity(Color currentColor) {
+        for(MapColor c : heatMapColors) {
+            if(c.getColor().equals(currentColor)) {
+                return c.getIntensity();
+            }
+        }
+        return 0;
     }
 
     @Override
