@@ -8,7 +8,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
@@ -21,9 +20,6 @@ public class MapController implements Initializable {
 
     @FXML
     Canvas canvas;
-
-    @FXML
-    Pane pane;
 
     private static final int RADIUS = 30;
     private final int DURATION_MS = 3;
