@@ -43,9 +43,7 @@ public class HeatMap {
     public void colorCanvas(int centerX, int centerY, double[][] screenMap) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         PixelWriter pixelWriter = gc.getPixelWriter();
-        WritableImage snap = gc.getCanvas().snapshot(null, null);
 
-        Color currentColor;
         int xInitialPos = centerX - Utils.RADIUS;
         int xEndPos = centerX + Utils.RADIUS;
         int yInitialPos = centerY - Utils.RADIUS;
@@ -62,14 +60,8 @@ public class HeatMap {
         }
     }
 
-    private Color getNextIntensityColor(Color currentColor) {
-        Color nextIntensityColor = nextIntensityMap.get(currentColor);
-        return nextIntensityColor;
-    }
-
     //ignore decimals for mapping
     private Color getColorFromDuration(double duration) {
-        System.out.println(duration);
         if(duration < 50) {
             return heatMapColorsList.get(0).getColor();
         } else if(duration < 100) {
@@ -82,8 +74,7 @@ public class HeatMap {
             return heatMapColorsList.get(4).getColor();
         } else if(duration < 300) {
             return heatMapColorsList.get(5).getColor();
-        }
-        else if(duration < MAX_HEAT) {
+        } else if(duration < MAX_HEAT) {
             return heatMapColorsList.get(6).getColor();
         }
 
