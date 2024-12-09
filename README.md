@@ -25,11 +25,13 @@ https://sitetuners.com/blog/do-heat-maps-really-work/
 including the addition of a gradient radiating outwards like in the image above. 
 In the future, I may add a webview on the screen with the translucent heat map rendering on top of the page.
 
-Notes: 
+
+![screenshot of app recording](/src/main/resources/recordings/Image_of_thermal_app.png)
+
+### Notes: 
 
 A recording can be found in the `/resources/recordings` directory.
 
 The gradient palette was selected from here: https://www.rapidtables.com/web/color/RGB_Color.html.
 Also, I originally named the app `Temperature Map`, but ended up liking `Heat Map` better so used that naming convention 
 within the code. 
-
