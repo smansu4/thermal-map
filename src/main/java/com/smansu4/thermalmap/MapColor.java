@@ -5,6 +5,11 @@ import javafx.scene.paint.Color;
 public class MapColor {
 
     private Color color;
+    /*
+        note: intensity and name is not needed with current implementation of the heat map.
+        However, they help with readability and let's user easily know which color is being
+        referred to.
+     */
     private String name;
     private int intensity;
 
@@ -12,18 +17,9 @@ public class MapColor {
         this.intensity = intensity;
         this.color = Color.rgb(r, g, b);
         this.name = name;
-        
     }
 
     public Color getColor() {
         return color;
-    }
-
-    public int getIntensity() {
-        return intensity;
-    }
-
-    public String getName() {
-        return name;
     }
 }

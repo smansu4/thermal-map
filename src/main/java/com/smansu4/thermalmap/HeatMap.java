@@ -9,15 +9,19 @@ import java.util.List;
 
 public class HeatMap {
     static final int MAX_HEAT = 350;
+    private static final int HEAT_DIFFERENCE_CONSTANT = 50;
     private Canvas canvas;
+    //note: intensity and color name are not needed anymore. The MapColor class can be deleted,
+    //  and the type replaced with the Color class type. However, keeping them makes
+    //  updating the colors easier.
     private static final List<MapColor> heatMapColorsList = List.of(
-            new MapColor(204, 255, 255, 2, "lightBlue"),
-            new MapColor(204, 255, 229, 3, "blue"),
-            new MapColor(204, 255, 204, 4, "lightGreen"),
-            new MapColor(229, 255, 204, 5, "lightYellow"),
-            new MapColor(255, 255, 204, 6, "yellow"),
-            new MapColor(255, 229, 204, 7, "orange"),
-            new MapColor(255, 204, 204, 8, "red"));
+            new MapColor(153, 255, 255, 1, "light blue"),
+            new MapColor(153, 255, 229, 2, "sea foam green"),
+            new MapColor(153, 255, 153, 3, "light green"),
+            new MapColor(229, 255, 153, 4, "yellow green"),
+            new MapColor(255, 255, 153, 5, "yellow"),
+            new MapColor(255, 229, 153, 6, "orange"),
+            new MapColor(255, 153, 153, 7, "red"));
 
     public HeatMap(Canvas canvas) {
         this.canvas = canvas;
@@ -45,17 +49,17 @@ public class HeatMap {
 
     //ignore decimals for mapping
     private Color getColorFromDuration(double duration) {
-        if(duration < 50) {
+        if(duration < HEAT_DIFFERENCE_CONSTANT) {
             return heatMapColorsList.get(0).getColor();
-        } else if(duration < 100) {
+        } else if(duration < HEAT_DIFFERENCE_CONSTANT * 2) {
             return heatMapColorsList.get(1).getColor();
-        } else if(duration < 150) {
+        } else if(duration < HEAT_DIFFERENCE_CONSTANT * 3) {
             return heatMapColorsList.get(2).getColor();
-        } else if(duration < 200) {
+        } else if(duration < HEAT_DIFFERENCE_CONSTANT * 4) {
             return heatMapColorsList.get(3).getColor();
-        } else if(duration < 250) {
+        } else if(duration < HEAT_DIFFERENCE_CONSTANT * 5) {
             return heatMapColorsList.get(4).getColor();
-        } else if(duration < 300) {
+        } else if(duration < HEAT_DIFFERENCE_CONSTANT * 6) {
             return heatMapColorsList.get(5).getColor();
         } else if(duration < MAX_HEAT) {
             return heatMapColorsList.get(6).getColor();
