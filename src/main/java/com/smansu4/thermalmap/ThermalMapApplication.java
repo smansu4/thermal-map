@@ -17,6 +17,7 @@ public class ThermalMapApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setWidth(APP_WIDTH);
         stage.setHeight(APP_HEIGHT);
+        stage.setResizable(false);
         stage.setTitle("Thermal Map");
         stage.setScene(scene);
         stage.show();

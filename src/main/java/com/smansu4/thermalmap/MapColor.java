@@ -7,7 +7,7 @@ public class MapColor {
     private Color color;
     /*
         note: intensity and name is not needed with current implementation of the heat map.
-        However, they help with readability and let's user easily know which color is being
+        However, they help with readability and lets the user easily know which color is being
         referred to.
      */
     private String name;
@@ -15,7 +15,7 @@ public class MapColor {
 
     public MapColor(int r, int g, int b, int intensity, String name) {
         this.intensity = intensity;
-        this.color = Color.rgb(r, g, b);
+        this.color = Color.rgb(r, g, b, 0.6);
         this.name = name;
     }
 
