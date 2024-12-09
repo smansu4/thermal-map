@@ -8,10 +8,6 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.smansu4.thermalmap.ThermalMapApplication.APP_HEIGHT;
-import static com.smansu4.thermalmap.ThermalMapApplication.APP_WIDTH;
-import static com.smansu4.thermalmap.Utils.updateDurationFromProximityToCenter;
-
 public class MapController implements Initializable {
 
     @FXML
@@ -20,13 +16,13 @@ public class MapController implements Initializable {
     private int currentX;
     private int currentY;
     private HeatMap heatMap;
-    private double[][] screenMap = new double[APP_WIDTH][APP_HEIGHT];
+    private ScreenMap screenMap;
 
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
-            if(Utils.coordinateWithinAppBoundary(currentX, currentY)) {
-                updateDurationFromProximityToCenter(currentX, currentY, screenMap);
+            if(screenMap.coordinateWithinAppBoundary(currentX, currentY)) {
+                screenMap.updateDurationFromProximityToCenter(currentX, currentY);
                 heatMap.colorCanvas(currentX, currentY, screenMap);
             }
         }
@@ -40,6 +36,7 @@ public class MapController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        screenMap = new ScreenMap();
         heatMap = new HeatMap(canvas);
 
         animationTimer.handle(0);

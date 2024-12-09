@@ -3,17 +3,12 @@ package com.smansu4.thermalmap;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static com.smansu4.thermalmap.Utils.MAX_HEAT;
 
 public class HeatMap {
-    private static Map<Color, Color> nextIntensityMap;
+    static final int MAX_HEAT = 350;
     private Canvas canvas;
     private static final List<MapColor> heatMapColorsList = List.of(
             new MapColor(204, 255, 255, 2, "lightBlue"),
@@ -25,35 +20,23 @@ public class HeatMap {
             new MapColor(255, 204, 204, 8, "red"));
 
     public HeatMap(Canvas canvas) {
-        nextIntensityMap = initializeHeatColorMap();
         this.canvas = canvas;
     }
 
-    private static Map<Color, Color> initializeHeatColorMap() {
-        Map<Color, Color> map = new HashMap<>();
-        for(int i = 0; i < heatMapColorsList.size() - 1; i++) {
-            map.put(heatMapColorsList.get(i).getColor(), heatMapColorsList.get(i+1).getColor());
-        }
-
-        map.put(heatMapColorsList.getLast().getColor(), heatMapColorsList.getLast().getColor());
-
-        return map;
-    }
-
-    public void colorCanvas(int centerX, int centerY, double[][] screenMap) {
+    public void colorCanvas(int centerX, int centerY, ScreenMap screenMap) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         PixelWriter pixelWriter = gc.getPixelWriter();
 
-        int xInitialPos = centerX - Utils.RADIUS;
-        int xEndPos = centerX + Utils.RADIUS;
-        int yInitialPos = centerY - Utils.RADIUS;
-        int yEndPos = centerY + Utils.RADIUS;
+        int xInitialPos = centerX - ScreenMap.RADIUS;
+        int xEndPos = centerX + ScreenMap.RADIUS;
+        int yInitialPos = centerY - ScreenMap.RADIUS;
+        int yEndPos = centerY + ScreenMap.RADIUS;
 
         for (int x = xInitialPos; x <= xEndPos; x++) {
             for (int y = yInitialPos; y <= yEndPos; y++) {
-                if(Utils.coordinateWithinAppBoundary(x, y)) {
-                    if (Utils.isInsideCircle(x, y, centerX, centerY)) {
-                        pixelWriter.setColor(x, y, getColorFromDuration(screenMap[x][y]));
+                if(screenMap.coordinateWithinAppBoundary(x, y)) {
+                    if (screenMap.isInsideCircle(x, y, centerX, centerY)) {
+                        pixelWriter.setColor(x, y, getColorFromDuration(screenMap.getMap()[x][y]));
                     }
                 }
             }
