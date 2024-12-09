@@ -40,8 +40,8 @@ Image with latest color scheme:
 
 A recording can be found in the `/resources/recordings` directory.
 
-Currently, the user cannot scroll with a keyboard mouse on the rendered webpage. However, they can use the keyboard 
-arrows to scroll instead. 
+<b>Currently, the user cannot scroll with a keyboard mouse on the rendered webpage. However, they can use the keyboard 
+arrows to scroll instead.</b>
 
 The gradient palette was selected from here: https://www.rapidtables.com/web/color/RGB_Color.html.
 Also, I originally named the app `Temperature Map`, but ended up liking `Heat Map` better so used that naming convention 
