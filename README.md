@@ -22,11 +22,24 @@ I wanted the heat map to look something similar to an image on the webpage
 here: https://sitetuners.com/blog/do-heat-maps-really-work/ under the `Eye Tracking Heat Map` section. Similar to that 
 image, I wanted to render a gradient of color radiating outwards.
 
-#### Potential Future Updates:
-- Enable mouse / trackpad scrolling of the webpage.
-- Update the heatmap to scroll when the webpage scrolls 
+### Potential Future Updates:
+- Enable mouse / trackpad scrolling of the webpage. 
+  - Currently, the canvas is rendered over the webView and so is in focus. The scroll handler on the webView is not invoked because it's not in focus.
+- Update the heatmap to scroll when the webpage scrolls. 
+  - Would need to dynamically resize the map when user scrolls the webpage. To do this, the canvas needs to know when the webView scroll event occurs. Can't have the canvas extend the webView component because it's a final class. May need a larger refactor.  
+
+### Notes:
+A recording of the heat map against a blank canvas can be found in the `/resources/recordings` directory.
+
+<b>Currently, the user cannot scroll the rendered webpage with a trackpad mouse. However, they can use the keyboard
+arrows to scroll instead.</b>
+
+The gradient palette was selected from here: https://www.rapidtables.com/web/color/RGB_Color.html.
+Also, I originally named the app `Temperature Map`, but ended up liking `Heat Map` better so used that naming convention
+within the code.
 
 
+### Screenshots: 
 Image of heat map on a blank canvas:
 ![screenshot of app recording](/src/main/resources/recordings/Image_of_thermal_app.png)
 
@@ -35,14 +48,3 @@ Image of what the heat map looks like on a webpage:
 
 Image with latest color scheme:
 ![screenshot of heat map on webpage](/src/main/resources/recordings/heat-map-color2.png)
-
-### Notes: 
-
-A recording of the heat map against a blank canvas can be found in the `/resources/recordings` directory.
-
-<b>Currently, the user cannot scroll the rendered webpage with a trackpad mouse. However, they can use the keyboard 
-arrows to scroll instead.</b>
-
-The gradient palette was selected from here: https://www.rapidtables.com/web/color/RGB_Color.html.
-Also, I originally named the app `Temperature Map`, but ended up liking `Heat Map` better so used that naming convention 
-within the code. 
