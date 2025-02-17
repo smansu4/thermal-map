@@ -3,10 +3,11 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.web.WebView?>
+<?import javafx.scene.layout.StackPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smansu4.thermalmap.MapController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smansu4.thermalmap.MapController">
    <children>
       <WebView fx:id="webView" minHeight="700.0" minWidth="1000.0" />
       <Canvas fx:id="canvas" height="700.0" width="1000.0" onMouseMoved="#setOnMouseMoved"  />
    </children>
-</Pane>
+</StackPane>

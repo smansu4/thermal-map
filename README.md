@@ -24,9 +24,9 @@ image, I wanted to render a gradient of color radiating outwards.
 
 ### Potential Future Updates:
 - Enable mouse / trackpad scrolling of the webpage. 
-  - Currently, the canvas is rendered over the webView and so is in focus. The scroll handler on the webView is not invoked because it's not in focus.
+  - Complete -- commented out in the `MapController.java` file.
 - Update the heatmap to scroll when the webpage scrolls. 
-  - Would need to dynamically resize the map when user scrolls the webpage. To do this, the canvas needs to know when the webView scroll event occurs. Can't have the canvas extend the webView component because it's a final class. May need a larger refactor.  
+  - Would need to dynamically resize the map when user scrolls the webpage.  
 
 ### Notes:
 A recording of the heat map against a blank canvas can be found in the `/resources/recordings` directory.
