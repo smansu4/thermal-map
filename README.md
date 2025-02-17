@@ -22,11 +22,10 @@ I wanted the heat map to look something similar to an image on the webpage
 here: https://sitetuners.com/blog/do-heat-maps-really-work/ under the `Eye Tracking Heat Map` section. Similar to that 
 image, I wanted to render a gradient of color radiating outwards.
 
-### Potential Future Updates:
-- Enable mouse / trackpad scrolling of the webpage. 
-  - Complete -- commented out in the `MapController.java` file.
+### ~~Potential Future~~ Updates:
 - Update the heatmap to scroll when the webpage scrolls. 
-  - Would need to dynamically resize the map when user scrolls the webpage.  
+  - Doing this may require executing additional javascript code to interact directly with the webpage. This will get complex
+    Instead of doing this, it makes more sense to write this app in javascript and render the heat map on the browser directly. 
 
 ### Notes:
 A recording of the heat map against a blank canvas can be found in the `/resources/recordings` directory.

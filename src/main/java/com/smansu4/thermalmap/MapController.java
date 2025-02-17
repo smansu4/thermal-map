@@ -1,6 +1,7 @@
 package com.smansu4.thermalmap;
 
 import javafx.animation.AnimationTimer;
+import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -54,10 +55,10 @@ public class MapController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Enables scrolling on the webview;
-//        canvas.addEventHandler(ScrollEvent.SCROLL, event -> {
-//            double deltaY = event.getDeltaY() * 0.5;
-//            scrollWebView(webView, deltaY);
-//        });
+        canvas.addEventHandler(ScrollEvent.SCROLL, event -> {
+            double deltaY = event.getDeltaY() * 0.5 * -1;
+            scrollWebView(webView, deltaY);
+        });
 
         webEngine = webView.getEngine();
         webEngine.load(site);
